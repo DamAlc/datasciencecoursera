@@ -33,14 +33,15 @@ features<-read.table("features.txt")
 features[,2]<-as.character(features[,2])
 colnames(acc)<-c("subject","activity",features[,2])
 
-##Remove duplicate columns
+##Create a data frame withour duplicate columns
 ## Some columns have duplicate names and this complicates operations on the table
 ## Non of these duplicate columns will be used in the rest of the exercise
-## So we can remove the duplicate columns
+## So we can create a data frame without the duplicate columns
 accnd <- acc[, !duplicated(colnames(acc))]
 sum(duplicated(colnames(accnd)))
 
 ## Extract measurements on the mean and the st.dev
+
 ##Only measurements containing "mean()" or "std()" are actually means or st.dev
 ##Measurements containing "mean" or "std" without brackets are calculations on the mean or st.dev
 accms<-select(accnd,subject,activity,contains("mean()"),contains("std()"))
@@ -67,6 +68,6 @@ accms$activity<-gsub(6,al[6,2],accms$activity)
 
 newdf<-ddply(accms, .(subject,activity), colwise(mean))
 colnames(newdf) <- paste("mean", colnames(newdf), sep = "-")
-newdf <- rename(newdf,c("mean-subject" = "subject", "mean-activity" = "activity"))
+colnames(newdf)[1] <- "subject"
+colnames(newdf)[2] <- "activity"
 View(newdf)
-
