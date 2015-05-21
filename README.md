@@ -1,6 +1,6 @@
 ##run_analysis.R
 
-This cookbook explains the steps taken to convert the raw data from UCIHARDataset.zip and
+This file explains the steps taken to convert the raw data from UCIHARDataset.zip and
 convert it to the tidy data table tidymean.txt. The working directory should be set to the
 directory where the UCIHARDataset.zip is unzipped.
 
